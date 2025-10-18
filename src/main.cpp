@@ -48,7 +48,7 @@ int main()
                 obj->Update(dt);
 
         BeginDrawing();
-        ClearBackground(BLACK);
+        ClearBackground(RAYWHITE);
 
         for (auto &obj : objects)
             if (obj->active)

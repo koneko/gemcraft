@@ -2,12 +2,29 @@ PROJECT_NAME = game
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
-
-RAYLIB_PATH = C:/raylib/raylib
+TARGET = bin/game
 
 CC = C:\raylib\w64devkit\bin\g++
 CFLAGS = -Wall -std=c++17 -O2 -I$(RAYLIB_PATH)/src -Iinclude
 LDFLAGS = -LC:/raylib/raylib/src -lraylib -lopengl32 -lgdi32 -lwinmm -Iinclude
+
+ifeq ($(OS),Windows_NT)
+    # --- Windows / MinGW / w64devkit ---
+    CC := C:\raylib\w64devkit\bin\g++
+    RAYLIB_PATH := C:/raylib/raylib
+    LIBS := -LC:/raylib/raylib/src -lraylib -lopengl32 -lgdi32 -lwinmm
+    RM := del /Q
+    MKDIR := mkdir
+    SEP := \\
+else
+    # --- Linux ---
+    CC := g++
+    RAYLIB_PATH := /usr/include
+    LIBS := -lraylib -lm -lpthread -ldl -lrt -lGL -lX11
+    RM := rm -f
+    MKDIR := mkdir -p
+    SEP := /
+endif
 
 # Find all source files (one or two subfolders deep)
 SRC := $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*/*.cpp) $(wildcard $(SRC_DIR)/*/*/*.cpp)
@@ -28,4 +45,7 @@ clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 	@echo "🧹 Cleaned."
 
-.PHONY: all clean
+run:
+	$(TARGET)
+
+.PHONY: all clean run
