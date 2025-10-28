@@ -8,11 +8,11 @@ CC = C:\raylib\w64devkit\bin\g++
 CFLAGS = -Wall -std=c++17 -O2 -I$(RAYLIB_PATH)/src -Iinclude
 LDFLAGS = -LC:/raylib/raylib/src -lraylib -lopengl32 -lgdi32 -lwinmm -Iinclude
 
-ifeq ($(OS),Windows_NT)
+ifeq ($(PLATFORM_OS),Windows_NT)
     # --- Windows / MinGW / w64devkit ---
     CC := C:\raylib\w64devkit\bin\g++
     RAYLIB_PATH := C:/raylib/raylib
-    LIBS := -LC:/raylib/raylib/src -lraylib -lopengl32 -lgdi32 -lwinmm
+    LIBS := -LC:/raylib/raylib/src -lraylib -lopengl32 -lgdi32 -lwinmm -Iinclude
     RM := del /Q
     MKDIR := mkdir
     SEP := \\
@@ -34,7 +34,7 @@ all: $(BIN_DIR)/$(PROJECT_NAME)
 
 $(BIN_DIR)/$(PROJECT_NAME): $(OBJS)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+	$(CC) $(OBJS) -o $@ $(LIBS)
 	@echo "✅ Build complete: $@"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp

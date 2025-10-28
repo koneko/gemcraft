@@ -13,7 +13,6 @@ int main()
     const int SCREEN_HEIGHT = 1080;
 
     float dt;
-
     auto &longLiving = GameState::get().longLiving;
     auto &objects = GameState::get().objects;
     auto &ui = GameState::get().ui;
