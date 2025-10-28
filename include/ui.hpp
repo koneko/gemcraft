@@ -10,13 +10,13 @@ public:
     bool active = true;
 
     UI() = default;
-    virtual ~UI() = default;
+    ~UI() = default;
 
-    virtual void Update(float deltaTime);
+    void Update(float deltaTime);
 
-    virtual void Draw();
+    void Draw();
 
-    virtual void OnClick();
+    void OnClick();
 
-    virtual void OnMouseOver();
+    void OnMouseOver();
 };

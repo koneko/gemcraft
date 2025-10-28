@@ -13,11 +13,11 @@ public:
 
     Text(Vector2 pos, std::string content);
 
-    void Update(float deltaTime) override;
+    void Update(float deltaTime);
 
-    void Draw() override;
+    void Draw();
 
-    void OnClick() override;
+    void OnClick();
 
-    void OnMouseOver() override;
+    void OnMouseOver();
 };
